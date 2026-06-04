@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Family Grocery List</title>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       STEP 1: Paste your Firebase config values below.
-       See the setup guide for instructions.
-  ════════════════════════════════════════════════════════════════ -->
   <script>
     const FIREBASE_CONFIG = {
       apiKey:            "AIzaSyD_vrgY8hFR1oeMyDR-FOiRrG14WPo_LAQ",
@@ -21,7 +17,6 @@
     };
   </script>
 
-  <!-- Firebase SDKs (loaded from Google CDN — no install needed) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
@@ -35,19 +30,6 @@
       padding: 0 0 32px;
     }
 
-    /* ── Setup banner (shown until Firebase is configured) ── */
-    #setupBanner {
-      background: #fef3c7;
-      border-bottom: 2px solid #fbbf24;
-      padding: 12px 16px;
-      font-size: 0.88rem;
-      color: #92400e;
-      text-align: center;
-      display: none;
-    }
-    #setupBanner a { color: #b45309; font-weight: 700; }
-
-    /* ── Connection status ── */
     #statusBar {
       background: #f9fafb;
       border-bottom: 1px solid #e5e7eb;
@@ -59,16 +41,10 @@
       gap: 6px;
       justify-content: center;
     }
-    .status-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #d1d5db;
-      flex-shrink: 0;
-    }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; }
     .status-dot.online  { background: #16a34a; }
     .status-dot.offline { background: #ef4444; }
 
-    /* ── Tabs ── */
     .tabs {
       display: flex;
       background: white;
@@ -77,21 +53,11 @@
       top: 0;
       z-index: 10;
     }
-
     .tab-btn {
-      flex: 1;
-      padding: 14px 8px;
-      background: none;
-      border: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #6b7280;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: color 0.15s, border-color 0.15s;
+      flex: 1; padding: 14px 8px; background: none; border: none;
+      font-size: 0.95rem; font-weight: 600; color: #6b7280; cursor: pointer;
+      border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s;
     }
-
     .tab-btn.active { color: #15803d; border-bottom-color: #16a34a; }
 
     .page { display: none; padding: 24px 16px; }
@@ -99,24 +65,13 @@
     .container { max-width: 480px; margin: 0 auto; }
 
     header { text-align: center; margin-bottom: 24px; }
-    header h1 {
-      font-size: 1.9rem; color: #15803d;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
+    header h1 { font-size: 1.9rem; color: #15803d; display: flex; align-items: center; justify-content: center; gap: 10px; }
     header p { color: #6b7280; margin-top: 6px; font-size: 0.9rem; }
 
-    /* ── Name banner ── */
     .name-banner {
-      background: #f0fdf4;
-      border: 2px solid #d1fae5;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: #374151;
+      background: #f0fdf4; border: 2px solid #d1fae5; border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 18px; display: flex; align-items: center;
+      gap: 10px; font-size: 0.9rem; color: #374151;
     }
     .name-banner span { flex: 1; }
     .name-banner strong { color: #15803d; }
@@ -125,10 +80,9 @@
       border-radius: 7px; padding: 5px 12px; font-size: 0.85rem; cursor: pointer;
     }
 
-    /* ── Add form ── */
     .add-form {
-      background: white; border-radius: 16px;
-      padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 20px;
+      background: white; border-radius: 16px; padding: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 20px;
     }
     .add-form .row { display: flex; gap: 8px; margin-bottom: 10px; }
     .add-form input[type="text"] {
@@ -153,20 +107,15 @@
       margin-bottom: 12px; font-size: 0.85rem; color: #6b7280; padding: 0 4px;
     }
     .stats strong { color: #111827; }
-    .btn-clear {
-      background: none; border: none; color: #ef4444;
-      font-size: 0.85rem; cursor: pointer; text-decoration: underline;
-    }
+    .btn-clear { background: none; border: none; color: #ef4444; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
 
     .category-group { margin-bottom: 16px; }
     .category-label {
       font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.06em; color: #9ca3af; padding: 0 4px 6px;
     }
-    .grocery-list {
-      background: white; border-radius: 14px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden;
-    }
+    .grocery-list { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+
     .item {
       display: flex; align-items: center; padding: 14px 16px;
       border-bottom: 1px solid #f3f4f6; gap: 12px; transition: background 0.15s;
@@ -174,57 +123,32 @@
     .item:last-child { border-bottom: none; }
     .item:hover { background: #f9fafb; }
     .item.done { opacity: 0.5; }
-    .item input[type="checkbox"] {
-      width: 22px; height: 22px; accent-color: #16a34a; cursor: pointer; flex-shrink: 0;
-    }
+    .item input[type="checkbox"] { width: 22px; height: 22px; accent-color: #16a34a; cursor: pointer; flex-shrink: 0; }
     .item-info { flex: 1; min-width: 0; }
-    .item-name {
-      font-size: 1rem; color: #111827;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .item-name { font-size: 1rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .item.done .item-name { text-decoration: line-through; color: #9ca3af; }
     .item-sub { font-size: 0.75rem; margin-top: 2px; }
     .item-sub .added-by { color: #9ca3af; }
     .item-sub .bought-by { color: #16a34a; }
-    .item-qty {
-      font-size: 0.85rem; color: #6b7280; background: #f3f4f6;
-      border-radius: 6px; padding: 2px 8px; flex-shrink: 0;
-    }
-    .btn-delete {
-      background: none; border: none; color: #d1d5db;
-      font-size: 1.1rem; cursor: pointer; padding: 0 4px;
-      transition: color 0.15s; flex-shrink: 0;
-    }
+    .item-qty { font-size: 0.85rem; color: #6b7280; background: #f3f4f6; border-radius: 6px; padding: 2px 8px; flex-shrink: 0; }
+    .btn-delete { background: none; border: none; color: #d1d5db; font-size: 1.1rem; cursor: pointer; padding: 0 4px; transition: color 0.15s; flex-shrink: 0; }
     .btn-delete:hover { color: #ef4444; }
 
     .empty { text-align: center; padding: 40px 20px; color: #9ca3af; }
     .empty .icon { font-size: 3rem; margin-bottom: 10px; }
 
-    /* ── History ── */
-    .history-controls {
-      display: flex; gap: 8px; margin-bottom: 16px; align-items: center;
-    }
-    .history-controls select,
-    .history-controls input {
+    .history-controls { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
+    .history-controls select, .history-controls input {
       flex: 1; padding: 10px 12px; border: 2px solid #d1fae5;
-      border-radius: 10px; font-size: 0.9rem; outline: none;
-      background: white; color: #374151;
+      border-radius: 10px; font-size: 0.9rem; outline: none; background: white; color: #374151;
     }
-    .history-controls select:focus,
-    .history-controls input:focus { border-color: #16a34a; }
+    .history-controls select:focus, .history-controls input:focus { border-color: #16a34a; }
     .btn-clear-history {
       padding: 10px 14px; background: none; border: 2px solid #fecaca;
-      border-radius: 10px; color: #ef4444; font-size: 0.85rem;
-      cursor: pointer; white-space: nowrap;
+      border-radius: 10px; color: #ef4444; font-size: 0.85rem; cursor: pointer; white-space: nowrap;
     }
-    .history-list {
-      background: white; border-radius: 14px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden;
-    }
-    .history-item {
-      display: flex; align-items: flex-start; padding: 14px 16px;
-      border-bottom: 1px solid #f3f4f6; gap: 14px;
-    }
+    .history-list { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+    .history-item { display: flex; align-items: flex-start; padding: 14px 16px; border-bottom: 1px solid #f3f4f6; gap: 14px; }
     .history-item:last-child { border-bottom: none; }
     .history-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
     .history-detail { flex: 1; min-width: 0; }
@@ -233,46 +157,23 @@
     .history-meta .buyer { color: #16a34a; font-weight: 600; }
     .history-date { font-size: 0.8rem; color: #9ca3af; text-align: right; flex-shrink: 0; }
 
-    /* ── Name modal ── */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.4); z-index: 100;
-      align-items: center; justify-content: center;
-    }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
-    .modal {
-      background: white; border-radius: 18px; padding: 28px 24px;
-      width: 320px; max-width: 90vw;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.18); text-align: center;
-    }
+    .modal { background: white; border-radius: 18px; padding: 28px 24px; width: 320px; max-width: 90vw; box-shadow: 0 8px 40px rgba(0,0,0,0.18); text-align: center; }
     .modal h2 { font-size: 1.3rem; color: #111827; margin-bottom: 8px; }
     .modal p { font-size: 0.9rem; color: #6b7280; margin-bottom: 18px; }
-    .modal input {
-      width: 100%; padding: 12px 14px; border: 2px solid #d1fae5;
-      border-radius: 10px; font-size: 1rem; outline: none;
-      margin-bottom: 14px; text-align: center;
-    }
+    .modal input { width: 100%; padding: 12px 14px; border: 2px solid #d1fae5; border-radius: 10px; font-size: 1rem; outline: none; margin-bottom: 14px; text-align: center; }
     .modal input:focus { border-color: #16a34a; }
-    .modal button {
-      width: 100%; padding: 12px; background: #16a34a; color: white;
-      border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;
-    }
+    .modal button { width: 100%; padding: 12px; background: #16a34a; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
   </style>
 </head>
 <body>
 
-<!-- Setup warning (shown if Firebase not yet configured) -->
-<div id="setupBanner">
-  ⚠️ Firebase not configured yet — see the <strong>Setup Guide</strong> to connect your database. The app is running in <strong>offline demo mode</strong>.
-</div>
-
-<!-- Connection status -->
 <div id="statusBar">
   <div class="status-dot" id="statusDot"></div>
   <span id="statusText">Connecting…</span>
 </div>
 
-<!-- Name modal -->
 <div class="modal-overlay" id="nameModal">
   <div class="modal">
     <h2>👋 Who are you?</h2>
@@ -282,13 +183,11 @@
   </div>
 </div>
 
-<!-- Tabs -->
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('list', this)">🛒 Shopping List</button>
   <button class="tab-btn" onclick="showTab('history', this)">📋 Purchase History</button>
 </div>
 
-<!-- ── List page ── -->
 <div class="page active" id="page-list">
 <div class="container">
   <header>
@@ -331,7 +230,6 @@
 </div>
 </div>
 
-<!-- ── History page ── -->
 <div class="page" id="page-history">
 <div class="container">
   <header>
@@ -352,287 +250,204 @@
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════════
-//  Firebase init
-// ══════════════════════════════════════════════════════════════
-const isConfigured = FIREBASE_CONFIG.apiKey !== "YOUR_API_KEY";
-
-let db, itemsRef, historyRef;
-let items   = {};   // keyed by Firebase push ID
-let history = {};   // keyed by Firebase push ID
-
-if (isConfigured) {
   firebase.initializeApp(FIREBASE_CONFIG);
-  db = firebase.database();
-  itemsRef   = db.ref('items');
-  historyRef = db.ref('history');
+  const db         = firebase.database();
+  const itemsRef   = db.ref('items');
+  const historyRef = db.ref('history');
 
-  // Connection status
+  let items   = {};
+  let history = {};
+
   db.ref('.info/connected').on('value', snap => {
     const online = snap.val() === true;
-    document.getElementById('statusDot').className  = 'status-dot ' + (online ? 'online' : 'offline');
+    document.getElementById('statusDot').className   = 'status-dot ' + (online ? 'online' : 'offline');
     document.getElementById('statusText').textContent = online ? 'Live — syncing with family' : 'Offline — changes will sync when reconnected';
   });
 
-  // Real-time list listener
-  itemsRef.on('value', snap => {
-    items = snap.val() || {};
-    renderList();
-  });
-
-  // Real-time history listener
+  itemsRef.on('value', snap => { items = snap.val() || {}; renderList(); });
   historyRef.on('value', snap => {
     history = snap.val() || {};
     if (document.getElementById('page-history').classList.contains('active')) renderHistory();
   });
 
-} else {
-  document.getElementById('setupBanner').style.display = 'block';
-  document.getElementById('statusDot').className  = 'status-dot offline';
-  document.getElementById('statusText').textContent = 'Not connected — Firebase setup required';
-  renderList(); // show empty state
-}
+  // ── Name ──
+  const NAME_KEY = 'family_grocery_name_v1';
+  let myName = localStorage.getItem(NAME_KEY) || '';
 
-// ══════════════════════════════════════════════════════════════
-//  Name
-// ══════════════════════════════════════════════════════════════
-const NAME_KEY = 'family_grocery_name_v1';
-let myName = localStorage.getItem(NAME_KEY) || '';
-
-function openNameModal() {
-  document.getElementById('modalNameInput').value = myName;
-  document.getElementById('nameModal').classList.add('open');
-  setTimeout(() => document.getElementById('modalNameInput').focus(), 100);
-}
-
-function saveName() {
-  const val = document.getElementById('modalNameInput').value.trim();
-  if (!val) return;
-  myName = val;
-  localStorage.setItem(NAME_KEY, myName);
-  document.getElementById('nameModal').classList.remove('open');
-  document.getElementById('currentNameDisplay').textContent = myName;
-}
-
-document.getElementById('modalNameInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') saveName();
-});
-
-// ══════════════════════════════════════════════════════════════
-//  Tabs
-// ══════════════════════════════════════════════════════════════
-function showTab(tab, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + tab).classList.add('active');
-  btn.classList.add('active');
-  if (tab === 'history') renderHistory();
-}
-
-// ══════════════════════════════════════════════════════════════
-//  List actions
-// ══════════════════════════════════════════════════════════════
-function addItem() {
-  const nameEl = document.getElementById('itemInput');
-  const qtyEl  = document.getElementById('qtyInput');
-  const catEl  = document.getElementById('categorySelect');
-  const name   = nameEl.value.trim();
-  if (!name) { nameEl.focus(); return; }
-
-  const entry = {
-    name,
-    qty:      qtyEl.value.trim() || '',
-    category: catEl.value,
-    done:     false,
-    addedBy:  myName || 'Unknown',
-    addedAt:  new Date().toISOString()
-  };
-
-  if (isConfigured) {
-    itemsRef.push(entry);
-  } else {
-    const id = 'local_' + Date.now();
-    items[id] = entry;
-    renderList();
+  function openNameModal() {
+    document.getElementById('modalNameInput').value = myName;
+    document.getElementById('nameModal').classList.add('open');
+    setTimeout(() => document.getElementById('modalNameInput').focus(), 100);
   }
 
-  nameEl.value = '';
-  qtyEl.value  = '';
-  nameEl.focus();
-}
+  function saveName() {
+    const val = document.getElementById('modalNameInput').value.trim();
+    if (!val) return;
+    myName = val;
+    localStorage.setItem(NAME_KEY, myName);
+    document.getElementById('nameModal').classList.remove('open');
+    document.getElementById('currentNameDisplay').textContent = myName;
+  }
 
-function toggleItem(id) {
-  const item = items[id];
-  if (!item) return;
-  const nowDone = !item.done;
+  document.getElementById('modalNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); });
 
-  if (isConfigured) {
+  // ── Tabs ──
+  function showTab(tab, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + tab).classList.add('active');
+    btn.classList.add('active');
+    if (tab === 'history') renderHistory();
+  }
+
+  // ── List actions ──
+  function addItem() {
+    const nameEl = document.getElementById('itemInput');
+    const qtyEl  = document.getElementById('qtyInput');
+    const catEl  = document.getElementById('categorySelect');
+    const name   = nameEl.value.trim();
+    if (!name) { nameEl.focus(); return; }
+    itemsRef.push({
+      name, qty: qtyEl.value.trim() || '', category: catEl.value,
+      done: false, addedBy: myName || 'Unknown', addedAt: new Date().toISOString()
+    });
+    nameEl.value = ''; qtyEl.value = ''; nameEl.focus();
+  }
+
+  function toggleItem(id) {
+    const item = items[id];
+    if (!item) return;
+    const nowDone = !item.done;
     itemsRef.child(id).update({ done: nowDone });
     if (nowDone) {
       historyRef.push({
-        name:        item.name,
-        qty:         item.qty  || '',
-        category:    item.category,
-        addedBy:     item.addedBy || '',
-        buyer:       myName || 'Unknown',
+        name: item.name, qty: item.qty || '', category: item.category,
+        addedBy: item.addedBy || '', buyer: myName || 'Unknown',
         purchasedAt: new Date().toISOString()
       });
     }
-  } else {
-    item.done = nowDone;
-    renderList();
   }
-}
 
-function deleteItem(id) {
-  if (isConfigured) {
-    itemsRef.child(id).remove();
-  } else {
-    delete items[id];
-    renderList();
-  }
-}
+  function deleteItem(id) { itemsRef.child(id).remove(); }
 
-function clearDone() {
-  const doneIds = Object.entries(items).filter(([,v]) => v.done).map(([k]) => k);
-  if (!doneIds.length) return;
-  if (isConfigured) {
+  function clearDone() {
     const updates = {};
-    doneIds.forEach(id => updates['items/' + id] = null);
-    db.ref().update(updates);
-  } else {
-    doneIds.forEach(id => delete items[id]);
-    renderList();
-  }
-}
-
-// ══════════════════════════════════════════════════════════════
-//  Render list
-// ══════════════════════════════════════════════════════════════
-function renderList() {
-  document.getElementById('currentNameDisplay').textContent = myName || '(not set)';
-  const container = document.getElementById('listContainer');
-  const all  = Object.entries(items).map(([id, v]) => ({ id, ...v }));
-  const total = all.length;
-  const done  = all.filter(i => i.done).length;
-
-  document.getElementById('statsText').innerHTML =
-    total === 0 ? 'No items yet' :
-    `<strong>${total - done}</strong> to get · <strong>${done}</strong> ticked off`;
-
-  if (total === 0) {
-    container.innerHTML = `<div class="empty"><div class="icon">🥬</div><p>Your list is empty — add something above!</p></div>`;
-    return;
+    Object.entries(items).filter(([,v]) => v.done).forEach(([k]) => updates['items/' + k] = null);
+    if (Object.keys(updates).length) db.ref().update(updates);
   }
 
-  const groups = {};
-  all.forEach(item => {
-    if (!groups[item.category]) groups[item.category] = [];
-    groups[item.category].push(item);
-  });
+  // ── Render list ──
+  function renderList() {
+    document.getElementById('currentNameDisplay').textContent = myName || '(not set)';
+    const container = document.getElementById('listContainer');
+    const all   = Object.entries(items).map(([id, v]) => ({ id, ...v }));
+    const total = all.length;
+    const done  = all.filter(i => i.done).length;
 
-  container.innerHTML = Object.entries(groups).map(([cat, catItems]) => {
-    const sorted = [...catItems].sort((a, b) => a.done - b.done);
-    return `
-      <div class="category-group">
-        <div class="category-label">${cat}</div>
-        <div class="grocery-list">
-          ${sorted.map(item => `
-            <div class="item${item.done ? ' done' : ''}">
-              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleItem('${item.id}')" />
-              <div class="item-info">
-                <div class="item-name">${escHtml(item.name)}</div>
-                <div class="item-sub">
-                  ${item.addedBy ? `<span class="added-by">Added by ${escHtml(item.addedBy)}</span>` : ''}
-                  ${item.done ? `<span class="bought-by"> · ✓ bought by ${escHtml(item.buyer || myName || '?')}</span>` : ''}
+    document.getElementById('statsText').innerHTML =
+      total === 0 ? 'No items yet' :
+      `<strong>${total - done}</strong> to get · <strong>${done}</strong> ticked off`;
+
+    if (total === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">🥬</div><p>Your list is empty — add something above!</p></div>`;
+      return;
+    }
+
+    const groups = {};
+    all.forEach(item => { if (!groups[item.category]) groups[item.category] = []; groups[item.category].push(item); });
+
+    container.innerHTML = Object.entries(groups).map(([cat, catItems]) => {
+      const sorted = [...catItems].sort((a, b) => a.done - b.done);
+      return `
+        <div class="category-group">
+          <div class="category-label">${cat}</div>
+          <div class="grocery-list">
+            ${sorted.map(item => `
+              <div class="item${item.done ? ' done' : ''}">
+                <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleItem('${item.id}')" />
+                <div class="item-info">
+                  <div class="item-name">${escHtml(item.name)}</div>
+                  <div class="item-sub">
+                    ${item.addedBy ? `<span class="added-by">Added by ${escHtml(item.addedBy)}</span>` : ''}
+                    ${item.done ? `<span class="bought-by"> · ✓ bought by ${escHtml(item.buyer || myName || '?')}</span>` : ''}
+                  </div>
                 </div>
+                ${item.qty ? `<span class="item-qty">${escHtml(item.qty)}</span>` : ''}
+                <button class="btn-delete" onclick="deleteItem('${item.id}')" title="Remove">✕</button>
               </div>
-              ${item.qty ? `<span class="item-qty">${escHtml(item.qty)}</span>` : ''}
-              <button class="btn-delete" onclick="deleteItem('${item.id}')" title="Remove">✕</button>
-            </div>
-          `).join('')}
+            `).join('')}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Render history ──
+  function renderHistory() {
+    const search    = document.getElementById('historySearch').value.toLowerCase();
+    const filterEl  = document.getElementById('historyFilter');
+    const filterVal = filterEl.value;
+    const all = Object.entries(history).map(([id, v]) => ({ id, ...v }))
+      .sort((a, b) => new Date(b.purchasedAt) - new Date(a.purchasedAt));
+
+    const buyers = [...new Set(all.map(h => h.buyer).filter(Boolean))].sort();
+    const saved  = filterEl.value;
+    filterEl.innerHTML = '<option value="">All people</option>' +
+      buyers.map(b => `<option value="${escHtml(b)}" ${b === saved ? 'selected' : ''}>${escHtml(b)}</option>`).join('');
+
+    let filtered = all;
+    if (filterVal) filtered = filtered.filter(h => h.buyer === filterVal);
+    if (search)    filtered = filtered.filter(h => h.name.toLowerCase().includes(search));
+
+    const container = document.getElementById('historyContainer');
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">📭</div><p>${all.length === 0 ? 'Nothing purchased yet.' : 'No results match your search.'}</p></div>`;
+      return;
+    }
+
+    const groups = {};
+    filtered.forEach(entry => {
+      const d   = new Date(entry.purchasedAt);
+      const key = d.toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(entry);
+    });
+
+    container.innerHTML = Object.entries(groups).map(([dateLabel, entries]) => `
+      <div class="category-group">
+        <div class="category-label">${dateLabel}</div>
+        <div class="history-list">
+          ${entries.map(entry => {
+            const t = new Date(entry.purchasedAt).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+            const emoji = (entry.category || '').split(' ')[0] || '🛒';
+            return `
+              <div class="history-item">
+                <div class="history-icon">${emoji}</div>
+                <div class="history-detail">
+                  <div class="history-name">${escHtml(entry.name)}${entry.qty ? ` <span style="font-weight:400;color:#6b7280">(${escHtml(entry.qty)})</span>` : ''}</div>
+                  <div class="history-meta">Bought by <span class="buyer">${escHtml(entry.buyer || 'Unknown')}</span></div>
+                </div>
+                <div class="history-date">${t}</div>
+              </div>`;
+          }).join('')}
         </div>
-      </div>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════════════════════════════
-//  Render history
-// ══════════════════════════════════════════════════════════════
-function renderHistory() {
-  const search    = document.getElementById('historySearch').value.toLowerCase();
-  const filterEl  = document.getElementById('historyFilter');
-  const filterVal = filterEl.value;
-
-  const all = Object.entries(history)
-    .map(([id, v]) => ({ id, ...v }))
-    .sort((a, b) => new Date(b.purchasedAt) - new Date(a.purchasedAt));
-
-  const buyers = [...new Set(all.map(h => h.buyer).filter(Boolean))].sort();
-  const saved  = filterEl.value;
-  filterEl.innerHTML = '<option value="">All people</option>' +
-    buyers.map(b => `<option value="${escHtml(b)}" ${b === saved ? 'selected' : ''}>${escHtml(b)}</option>`).join('');
-
-  let filtered = all;
-  if (filterVal) filtered = filtered.filter(h => h.buyer === filterVal);
-  if (search)    filtered = filtered.filter(h => h.name.toLowerCase().includes(search));
-
-  const container = document.getElementById('historyContainer');
-  if (filtered.length === 0) {
-    container.innerHTML = `<div class="empty"><div class="icon">📭</div><p>${all.length === 0 ? 'Nothing purchased yet.' : 'No results match your search.'}</p></div>`;
-    return;
-  }
-
-  const groups = {};
-  filtered.forEach(entry => {
-    const d   = new Date(entry.purchasedAt);
-    const key = d.toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(entry);
-  });
-
-  container.innerHTML = Object.entries(groups).map(([dateLabel, entries]) => `
-    <div class="category-group">
-      <div class="category-label">${dateLabel}</div>
-      <div class="history-list">
-        ${entries.map(entry => {
-          const t = new Date(entry.purchasedAt).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
-          const emoji = (entry.category || '').split(' ')[0] || '🛒';
-          return `
-            <div class="history-item">
-              <div class="history-icon">${emoji}</div>
-              <div class="history-detail">
-                <div class="history-name">${escHtml(entry.name)}${entry.qty ? ` <span style="font-weight:400;color:#6b7280">(${escHtml(entry.qty)})</span>` : ''}</div>
-                <div class="history-meta">Bought by <span class="buyer">${escHtml(entry.buyer || 'Unknown')}</span></div>
-              </div>
-              <div class="history-date">${t}</div>
-            </div>`;
-        }).join('')}
       </div>
-    </div>
-  `).join('');
-}
-
-function clearHistory() {
-  if (!confirm('Clear all purchase history? This cannot be undone.')) return;
-  if (isConfigured) {
-    historyRef.remove();
-  } else {
-    history = {};
-    renderHistory();
+    `).join('');
   }
-}
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+  function clearHistory() {
+    if (!confirm('Clear all purchase history? This cannot be undone.')) return;
+    historyRef.remove();
+  }
 
-// ── Init ──
-document.getElementById('itemInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
-document.getElementById('qtyInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 
-if (!myName) openNameModal();
-else document.getElementById('currentNameDisplay').textContent = myName;
+  document.getElementById('itemInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
+  document.getElementById('qtyInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
+
+  if (!myName) openNameModal();
+  else document.getElementById('currentNameDisplay').textContent = myName;
 </script>
 </body>
 </html>
