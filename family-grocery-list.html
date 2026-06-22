@@ -6,7 +6,7 @@
   <title>Family Grocery List</title>
 
   <!-- PWA -->
-  <meta name="theme-color" content="#7a9640" />
+  <meta name="theme-color" content="#0d9488" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -34,7 +34,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f4f9eb;
+      background: #f0fdfa;
       min-height: 100vh;
       padding: 0 0 32px;
     }
@@ -51,13 +51,13 @@
       justify-content: center;
     }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; }
-    .status-dot.online  { background: #7a9640; }
+    .status-dot.online  { background: #0d9488; }
     .status-dot.offline { background: #ef4444; }
 
     .tabs {
       display: flex;
       background: white;
-      border-bottom: 2px solid #ccdea0;
+      border-bottom: 2px solid #99f6e4;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -67,25 +67,25 @@
       font-size: 0.95rem; font-weight: 600; color: #6b7280; cursor: pointer;
       border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s;
     }
-    .tab-btn.active { color: #5a7c30; border-bottom-color: #7a9640; }
+    .tab-btn.active { color: #0f766e; border-bottom-color: #0d9488; }
 
     .page { display: none; padding: 24px 16px; }
     .page.active { display: block; }
     .container { max-width: 480px; margin: 0 auto; }
 
     header { text-align: center; margin-bottom: 24px; }
-    header h1 { font-size: 1.9rem; color: #5a7c30; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    header h1 { font-size: 1.9rem; color: #0f766e; display: flex; align-items: center; justify-content: center; gap: 10px; }
     header p { color: #6b7280; margin-top: 6px; font-size: 0.9rem; }
 
     .name-banner {
-      background: #f4f9eb; border: 2px solid #ccdea0; border-radius: 12px;
+      background: #f0fdfa; border: 2px solid #99f6e4; border-radius: 12px;
       padding: 12px 14px; margin-bottom: 18px; display: flex; align-items: center;
       gap: 10px; font-size: 0.9rem; color: #374151;
     }
     .name-banner span { flex: 1; }
-    .name-banner strong { color: #5a7c30; }
+    .name-banner strong { color: #0f766e; }
     .name-banner button {
-      background: #7a9640; color: white; border: none;
+      background: #0d9488; color: white; border: none;
       border-radius: 7px; padding: 5px 12px; font-size: 0.85rem; cursor: pointer;
     }
 
@@ -95,21 +95,21 @@
     }
     .add-form .row { display: flex; gap: 8px; margin-bottom: 10px; }
     .add-form input[type="text"] {
-      flex: 1; padding: 12px 14px; border: 2px solid #ccdea0;
+      flex: 1; padding: 12px 14px; border: 2px solid #99f6e4;
       border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.2s;
     }
-    .add-form input[type="text"]:focus { border-color: #7a9640; }
+    .add-form input[type="text"]:focus { border-color: #0d9488; }
     .add-form select {
-      padding: 12px 10px; border: 2px solid #ccdea0; border-radius: 10px;
+      padding: 12px 10px; border: 2px solid #99f6e4; border-radius: 10px;
       font-size: 0.9rem; outline: none; background: white; color: #374151; cursor: pointer;
     }
-    .add-form select:focus { border-color: #7a9640; }
+    .add-form select:focus { border-color: #0d9488; }
     .btn-add {
-      width: 100%; padding: 12px; background: #7a9640; color: white;
+      width: 100%; padding: 12px; background: #0d9488; color: white;
       border: none; border-radius: 10px; font-size: 1rem; font-weight: 600;
       cursor: pointer; transition: background 0.2s;
     }
-    .btn-add:hover { background: #5a7c30; }
+    .btn-add:hover { background: #0f766e; }
 
     .stats {
       display: flex; justify-content: space-between; align-items: center;
@@ -132,13 +132,13 @@
     .item:last-child { border-bottom: none; }
     .item:hover { background: #f9fafb; }
     .item.done { opacity: 0.5; }
-    .item input[type="checkbox"] { width: 22px; height: 22px; accent-color: #7a9640; cursor: pointer; flex-shrink: 0; }
+    .item input[type="checkbox"] { width: 22px; height: 22px; accent-color: #0d9488; cursor: pointer; flex-shrink: 0; }
     .item-info { flex: 1; min-width: 0; }
     .item-name { font-size: 1rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .item.done .item-name { text-decoration: line-through; color: #9ca3af; }
     .item-sub { font-size: 0.75rem; margin-top: 2px; }
     .item-sub .added-by { color: #9ca3af; }
-    .item-sub .bought-by { color: #7a9640; }
+    .item-sub .bought-by { color: #0d9488; }
     .item-qty { font-size: 0.85rem; color: #6b7280; background: #f3f4f6; border-radius: 6px; padding: 2px 8px; flex-shrink: 0; }
     .btn-fav {
       background: none; border: none; font-size: 1.2rem; cursor: pointer;
@@ -172,21 +172,21 @@
     .fav-name { font-size: 1rem; font-weight: 600; color: #111827; }
     .fav-meta { font-size: 0.78rem; color: #6b7280; margin-top: 2px; }
     .btn-fav-add {
-      padding: 7px 14px; background: #7a9640; color: white; border: none;
+      padding: 7px 14px; background: #0d9488; color: white; border: none;
       border-radius: 8px; font-size: 0.82rem; font-weight: 600;
       cursor: pointer; white-space: nowrap; transition: background 0.2s; flex-shrink: 0;
     }
-    .btn-fav-add:hover { background: #5a7c30; }
+    .btn-fav-add:hover { background: #0f766e; }
     .btn-fav-remove { background: none; border: none; color: #d1d5db; font-size: 1.1rem; cursor: pointer; padding: 0 4px; transition: color 0.15s; flex-shrink: 0; }
     .btn-fav-remove:hover { color: #ef4444; }
 
     /* ── HISTORY ─────────────────────────────── */
     .history-controls { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
     .history-controls select, .history-controls input {
-      flex: 1; padding: 10px 12px; border: 2px solid #ccdea0;
+      flex: 1; padding: 10px 12px; border: 2px solid #99f6e4;
       border-radius: 10px; font-size: 0.9rem; outline: none; background: white; color: #374151;
     }
-    .history-controls select:focus, .history-controls input:focus { border-color: #7a9640; }
+    .history-controls select:focus, .history-controls input:focus { border-color: #0d9488; }
     .btn-clear-history {
       padding: 10px 14px; background: none; border: 2px solid #fecaca;
       border-radius: 10px; color: #ef4444; font-size: 0.85rem; cursor: pointer; white-space: nowrap;
@@ -198,7 +198,7 @@
     .history-detail { flex: 1; min-width: 0; }
     .history-name { font-size: 1rem; font-weight: 600; color: #111827; }
     .history-meta { font-size: 0.82rem; color: #6b7280; margin-top: 3px; }
-    .history-meta .buyer { color: #7a9640; font-weight: 600; }
+    .history-meta .buyer { color: #0d9488; font-weight: 600; }
     .history-date { font-size: 0.8rem; color: #9ca3af; text-align: right; flex-shrink: 0; }
 
     /* ── MODAL ───────────────────────────────── */
@@ -207,9 +207,9 @@
     .modal { background: white; border-radius: 18px; padding: 28px 24px; width: 320px; max-width: 90vw; box-shadow: 0 8px 40px rgba(0,0,0,0.18); text-align: center; }
     .modal h2 { font-size: 1.3rem; color: #111827; margin-bottom: 8px; }
     .modal p { font-size: 0.9rem; color: #6b7280; margin-bottom: 18px; }
-    .modal input { width: 100%; padding: 12px 14px; border: 2px solid #ccdea0; border-radius: 10px; font-size: 1rem; outline: none; margin-bottom: 14px; text-align: center; }
-    .modal input:focus { border-color: #7a9640; }
-    .modal button { width: 100%; padding: 12px; background: #7a9640; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .modal input { width: 100%; padding: 12px 14px; border: 2px solid #99f6e4; border-radius: 10px; font-size: 1rem; outline: none; margin-bottom: 14px; text-align: center; }
+    .modal input:focus { border-color: #0d9488; }
+    .modal button { width: 100%; padding: 12px; background: #0d9488; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
   </style>
 </head>
 <body>
