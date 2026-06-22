@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Family Grocery List</title>
 
+  <!-- PWA -->
+  <meta name="theme-color" content="#7a9640" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Family List" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+
   <script>
     const FIREBASE_CONFIG = {
       apiKey:            "AIzaSyD_vrgY8hFR1oeMyDR-FOiRrG14WPo_LAQ",
@@ -25,7 +34,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f0fdf4;
+      background: #f4f9eb;
       min-height: 100vh;
       padding: 0 0 32px;
     }
@@ -42,13 +51,13 @@
       justify-content: center;
     }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; }
-    .status-dot.online  { background: #16a34a; }
+    .status-dot.online  { background: #7a9640; }
     .status-dot.offline { background: #ef4444; }
 
     .tabs {
       display: flex;
       background: white;
-      border-bottom: 2px solid #d1fae5;
+      border-bottom: 2px solid #ccdea0;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -58,25 +67,25 @@
       font-size: 0.95rem; font-weight: 600; color: #6b7280; cursor: pointer;
       border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s;
     }
-    .tab-btn.active { color: #15803d; border-bottom-color: #16a34a; }
+    .tab-btn.active { color: #5a7c30; border-bottom-color: #7a9640; }
 
     .page { display: none; padding: 24px 16px; }
     .page.active { display: block; }
     .container { max-width: 480px; margin: 0 auto; }
 
     header { text-align: center; margin-bottom: 24px; }
-    header h1 { font-size: 1.9rem; color: #15803d; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    header h1 { font-size: 1.9rem; color: #5a7c30; display: flex; align-items: center; justify-content: center; gap: 10px; }
     header p { color: #6b7280; margin-top: 6px; font-size: 0.9rem; }
 
     .name-banner {
-      background: #f0fdf4; border: 2px solid #d1fae5; border-radius: 12px;
+      background: #f4f9eb; border: 2px solid #ccdea0; border-radius: 12px;
       padding: 12px 14px; margin-bottom: 18px; display: flex; align-items: center;
       gap: 10px; font-size: 0.9rem; color: #374151;
     }
     .name-banner span { flex: 1; }
-    .name-banner strong { color: #15803d; }
+    .name-banner strong { color: #5a7c30; }
     .name-banner button {
-      background: #16a34a; color: white; border: none;
+      background: #7a9640; color: white; border: none;
       border-radius: 7px; padding: 5px 12px; font-size: 0.85rem; cursor: pointer;
     }
 
@@ -86,21 +95,21 @@
     }
     .add-form .row { display: flex; gap: 8px; margin-bottom: 10px; }
     .add-form input[type="text"] {
-      flex: 1; padding: 12px 14px; border: 2px solid #d1fae5;
+      flex: 1; padding: 12px 14px; border: 2px solid #ccdea0;
       border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.2s;
     }
-    .add-form input[type="text"]:focus { border-color: #16a34a; }
+    .add-form input[type="text"]:focus { border-color: #7a9640; }
     .add-form select {
-      padding: 12px 10px; border: 2px solid #d1fae5; border-radius: 10px;
+      padding: 12px 10px; border: 2px solid #ccdea0; border-radius: 10px;
       font-size: 0.9rem; outline: none; background: white; color: #374151; cursor: pointer;
     }
-    .add-form select:focus { border-color: #16a34a; }
+    .add-form select:focus { border-color: #7a9640; }
     .btn-add {
-      width: 100%; padding: 12px; background: #16a34a; color: white;
+      width: 100%; padding: 12px; background: #7a9640; color: white;
       border: none; border-radius: 10px; font-size: 1rem; font-weight: 600;
       cursor: pointer; transition: background 0.2s;
     }
-    .btn-add:hover { background: #15803d; }
+    .btn-add:hover { background: #5a7c30; }
 
     .stats {
       display: flex; justify-content: space-between; align-items: center;
@@ -123,26 +132,61 @@
     .item:last-child { border-bottom: none; }
     .item:hover { background: #f9fafb; }
     .item.done { opacity: 0.5; }
-    .item input[type="checkbox"] { width: 22px; height: 22px; accent-color: #16a34a; cursor: pointer; flex-shrink: 0; }
+    .item input[type="checkbox"] { width: 22px; height: 22px; accent-color: #7a9640; cursor: pointer; flex-shrink: 0; }
     .item-info { flex: 1; min-width: 0; }
     .item-name { font-size: 1rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .item.done .item-name { text-decoration: line-through; color: #9ca3af; }
     .item-sub { font-size: 0.75rem; margin-top: 2px; }
     .item-sub .added-by { color: #9ca3af; }
-    .item-sub .bought-by { color: #16a34a; }
+    .item-sub .bought-by { color: #7a9640; }
     .item-qty { font-size: 0.85rem; color: #6b7280; background: #f3f4f6; border-radius: 6px; padding: 2px 8px; flex-shrink: 0; }
+    .btn-fav {
+      background: none; border: none; font-size: 1.2rem; cursor: pointer;
+      padding: 0 4px; flex-shrink: 0; transition: transform 0.15s; line-height: 1;
+    }
+    .btn-fav:hover { transform: scale(1.3); }
     .btn-delete { background: none; border: none; color: #d1d5db; font-size: 1.1rem; cursor: pointer; padding: 0 4px; transition: color 0.15s; flex-shrink: 0; }
     .btn-delete:hover { color: #ef4444; }
 
     .empty { text-align: center; padding: 40px 20px; color: #9ca3af; }
     .empty .icon { font-size: 3rem; margin-bottom: 10px; }
 
+    /* ── FAVOURITES PAGE ─────────────────────── */
+    .favs-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .btn-clear-favs {
+      padding: 10px 14px; background: none; border: 2px solid #fecaca;
+      border-radius: 10px; color: #ef4444; font-size: 0.85rem; cursor: pointer; white-space: nowrap;
+    }
+    .favs-list { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+    .fav-item {
+      display: flex; align-items: center; padding: 14px 16px;
+      border-bottom: 1px solid #f3f4f6; gap: 12px;
+    }
+    .fav-item:last-child { border-bottom: none; }
+    .fav-item:hover { background: #fffbeb; }
+    .fav-star { font-size: 1.3rem; flex-shrink: 0; }
+    .fav-info { flex: 1; min-width: 0; }
+    .fav-name { font-size: 1rem; font-weight: 600; color: #111827; }
+    .fav-meta { font-size: 0.78rem; color: #6b7280; margin-top: 2px; }
+    .btn-fav-add {
+      padding: 7px 14px; background: #7a9640; color: white; border: none;
+      border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: background 0.2s; flex-shrink: 0;
+    }
+    .btn-fav-add:hover { background: #5a7c30; }
+    .btn-fav-remove { background: none; border: none; color: #d1d5db; font-size: 1.1rem; cursor: pointer; padding: 0 4px; transition: color 0.15s; flex-shrink: 0; }
+    .btn-fav-remove:hover { color: #ef4444; }
+
+    /* ── HISTORY ─────────────────────────────── */
     .history-controls { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
     .history-controls select, .history-controls input {
-      flex: 1; padding: 10px 12px; border: 2px solid #d1fae5;
+      flex: 1; padding: 10px 12px; border: 2px solid #ccdea0;
       border-radius: 10px; font-size: 0.9rem; outline: none; background: white; color: #374151;
     }
-    .history-controls select:focus, .history-controls input:focus { border-color: #16a34a; }
+    .history-controls select:focus, .history-controls input:focus { border-color: #7a9640; }
     .btn-clear-history {
       padding: 10px 14px; background: none; border: 2px solid #fecaca;
       border-radius: 10px; color: #ef4444; font-size: 0.85rem; cursor: pointer; white-space: nowrap;
@@ -154,17 +198,18 @@
     .history-detail { flex: 1; min-width: 0; }
     .history-name { font-size: 1rem; font-weight: 600; color: #111827; }
     .history-meta { font-size: 0.82rem; color: #6b7280; margin-top: 3px; }
-    .history-meta .buyer { color: #16a34a; font-weight: 600; }
+    .history-meta .buyer { color: #7a9640; font-weight: 600; }
     .history-date { font-size: 0.8rem; color: #9ca3af; text-align: right; flex-shrink: 0; }
 
+    /* ── MODAL ───────────────────────────────── */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
     .modal { background: white; border-radius: 18px; padding: 28px 24px; width: 320px; max-width: 90vw; box-shadow: 0 8px 40px rgba(0,0,0,0.18); text-align: center; }
     .modal h2 { font-size: 1.3rem; color: #111827; margin-bottom: 8px; }
     .modal p { font-size: 0.9rem; color: #6b7280; margin-bottom: 18px; }
-    .modal input { width: 100%; padding: 12px 14px; border: 2px solid #d1fae5; border-radius: 10px; font-size: 1rem; outline: none; margin-bottom: 14px; text-align: center; }
-    .modal input:focus { border-color: #16a34a; }
-    .modal button { width: 100%; padding: 12px; background: #16a34a; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .modal input { width: 100%; padding: 12px 14px; border: 2px solid #ccdea0; border-radius: 10px; font-size: 1rem; outline: none; margin-bottom: 14px; text-align: center; }
+    .modal input:focus { border-color: #7a9640; }
+    .modal button { width: 100%; padding: 12px; background: #7a9640; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -185,9 +230,11 @@
 
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('list', this)">🛒 Shopping List</button>
-  <button class="tab-btn" onclick="showTab('history', this)">📋 Purchase History</button>
+  <button class="tab-btn" onclick="showTab('favs', this)">⭐ Favourites</button>
+  <button class="tab-btn" onclick="showTab('history', this)">📋 History</button>
 </div>
 
+<!-- SHOPPING LIST PAGE -->
 <div class="page active" id="page-list">
 <div class="container">
   <header>
@@ -216,6 +263,13 @@
         <option value="🧹 Household">🧹 Household</option>
         <option value="❄️ Frozen">❄️ Frozen</option>
         <option value="🛒 Other" selected>🛒 Other</option>
+        <option value="🍷 Bar">🍷 Bar</option>
+        <option value="⛺ Camping">⛺ Camping</option>
+        <option value="🚗 Vehicles">🚗 Vehicles</option>
+        <option value="🌱 Garden">🌱 Garden</option>
+        <option value="🎁 Gifts">🎁 Gifts</option>
+        <option value="👕 Clothing">👕 Clothing</option>
+        <option value="🔌 Electrical">🔌 Electrical</option>
       </select>
       <button class="btn-add" onclick="addItem()">+ Add to List</button>
     </div>
@@ -230,6 +284,22 @@
 </div>
 </div>
 
+<!-- FAVOURITES PAGE -->
+<div class="page" id="page-favs">
+<div class="container">
+  <header>
+    <h1>⭐ Favourites</h1>
+    <p>Your go-to items — add them back to the list in one tap</p>
+  </header>
+  <div class="favs-header">
+    <span id="favsCount" style="font-size:0.85rem;color:#6b7280;"></span>
+    <button class="btn-clear-favs" onclick="clearFavourites()">Clear all</button>
+  </div>
+  <div id="favsContainer"></div>
+</div>
+</div>
+
+<!-- HISTORY PAGE -->
 <div class="page" id="page-history">
 <div class="container">
   <header>
@@ -251,26 +321,39 @@
 
 <script>
   firebase.initializeApp(FIREBASE_CONFIG);
-  const db         = firebase.database();
-  const itemsRef   = db.ref('items');
-  const historyRef = db.ref('history');
+  const db            = firebase.database();
+  const itemsRef      = db.ref('items');
+  const historyRef    = db.ref('history');
+  const favouritesRef = db.ref('favourites');
 
-  let items   = {};
-  let history = {};
+  let items      = {};
+  let history    = {};
+  let favourites = {};
 
   db.ref('.info/connected').on('value', snap => {
     const online = snap.val() === true;
-    document.getElementById('statusDot').className   = 'status-dot ' + (online ? 'online' : 'offline');
+    document.getElementById('statusDot').className    = 'status-dot ' + (online ? 'online' : 'offline');
     document.getElementById('statusText').textContent = online ? 'Live — syncing with family' : 'Offline — changes will sync when reconnected';
   });
 
-  itemsRef.on('value', snap => { items = snap.val() || {}; renderList(); });
+  itemsRef.on('value', snap => {
+    items = snap.val() || {};
+    renderList();
+  });
+
   historyRef.on('value', snap => {
     history = snap.val() || {};
     if (document.getElementById('page-history').classList.contains('active')) renderHistory();
   });
 
-  // ── Name ──
+  favouritesRef.on('value', snap => {
+    favourites = snap.val() || {};
+    if (document.getElementById('page-favs').classList.contains('active')) renderFavourites();
+    // refresh star states on the list
+    if (document.getElementById('page-list').classList.contains('active')) renderList();
+  });
+
+  // ── Name ──────────────────────────────────────────────────────────────────
   const NAME_KEY = 'family_grocery_name_v1';
   let myName = localStorage.getItem(NAME_KEY) || '';
 
@@ -291,16 +374,17 @@
 
   document.getElementById('modalNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); });
 
-  // ── Tabs ──
+  // ── Tabs ──────────────────────────────────────────────────────────────────
   function showTab(tab, btn) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('page-' + tab).classList.add('active');
     btn.classList.add('active');
     if (tab === 'history') renderHistory();
+    if (tab === 'favs')    renderFavourites();
   }
 
-  // ── List actions ──
+  // ── List actions ──────────────────────────────────────────────────────────
   function addItem() {
     const nameEl = document.getElementById('itemInput');
     const qtyEl  = document.getElementById('qtyInput');
@@ -336,7 +420,50 @@
     if (Object.keys(updates).length) db.ref().update(updates);
   }
 
-  // ── Render list ──
+  // ── Favourites actions ────────────────────────────────────────────────────
+  function addToFavourites(itemId) {
+    const item = items[itemId];
+    if (!item) return;
+    // prevent exact duplicates by name+category
+    const alreadyExists = Object.values(favourites).some(
+      f => f.name === item.name && f.category === item.category
+    );
+    if (alreadyExists) return;
+    favouritesRef.push({
+      name: item.name,
+      qty: item.qty || '',
+      category: item.category,
+      savedBy: myName || 'Unknown',
+      savedAt: new Date().toISOString()
+    });
+  }
+
+  function removeFromFavourites(favId) {
+    favouritesRef.child(favId).remove();
+  }
+
+  function addFavToList(favId) {
+    const fav = favourites[favId];
+    if (!fav) return;
+    itemsRef.push({
+      name: fav.name,
+      qty: fav.qty || '',
+      category: fav.category,
+      done: false,
+      addedBy: myName || 'Unknown',
+      addedAt: new Date().toISOString()
+    });
+    // Switch to shopping list tab
+    const shopBtn = document.querySelector('.tab-btn');
+    showTab('list', shopBtn);
+  }
+
+  function clearFavourites() {
+    if (!confirm('Clear all favourites? This cannot be undone.')) return;
+    favouritesRef.remove();
+  }
+
+  // ── Render list ───────────────────────────────────────────────────────────
   function renderList() {
     document.getElementById('currentNameDisplay').textContent = myName || '(not set)';
     const container = document.getElementById('listContainer');
@@ -362,7 +489,14 @@
         <div class="category-group">
           <div class="category-label">${cat}</div>
           <div class="grocery-list">
-            ${sorted.map(item => `
+            ${sorted.map(item => {
+              const isFav = Object.values(favourites).some(
+                f => f.name === item.name && f.category === item.category
+              );
+              const favBtn = item.done
+                ? `<button class="btn-fav" onclick="addToFavourites('${item.id}')" title="${isFav ? 'Already in Favourites' : 'Save to Favourites'}">${isFav ? '⭐' : '☆'}</button>`
+                : '';
+              return `
               <div class="item${item.done ? ' done' : ''}">
                 <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleItem('${item.id}')" />
                 <div class="item-info">
@@ -373,15 +507,53 @@
                   </div>
                 </div>
                 ${item.qty ? `<span class="item-qty">${escHtml(item.qty)}</span>` : ''}
+                ${favBtn}
                 <button class="btn-delete" onclick="deleteItem('${item.id}')" title="Remove">✕</button>
-              </div>
-            `).join('')}
+              </div>`;
+            }).join('')}
           </div>
         </div>`;
     }).join('');
   }
 
-  // ── Render history ──
+  // ── Render favourites ─────────────────────────────────────────────────────
+  function renderFavourites() {
+    const container = document.getElementById('favsContainer');
+    const all = Object.entries(favourites).map(([id, v]) => ({ id, ...v }));
+
+    document.getElementById('favsCount').textContent =
+      all.length === 0 ? '' : `${all.length} saved item${all.length !== 1 ? 's' : ''}`;
+
+    if (all.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">⭐</div><p>No favourites yet.<br>Tick off a purchased item and tap ☆ to save it here.</p></div>`;
+      return;
+    }
+
+    // Group by category
+    const groups = {};
+    all.forEach(f => { if (!groups[f.category]) groups[f.category] = []; groups[f.category].push(f); });
+
+    container.innerHTML = Object.entries(groups).map(([cat, favItems]) => `
+      <div class="category-group">
+        <div class="category-label">${cat}</div>
+        <div class="favs-list">
+          ${favItems.map(fav => `
+            <div class="fav-item">
+              <span class="fav-star">⭐</span>
+              <div class="fav-info">
+                <div class="fav-name">${escHtml(fav.name)}</div>
+                <div class="fav-meta">${escHtml(fav.category)}${fav.qty ? ' · qty: ' + escHtml(fav.qty) : ''}</div>
+              </div>
+              <button class="btn-fav-add" onclick="addFavToList('${fav.id}')">+ Add to List</button>
+              <button class="btn-fav-remove" onclick="removeFromFavourites('${fav.id}')" title="Remove from Favourites">✕</button>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ── Render history ────────────────────────────────────────────────────────
   function renderHistory() {
     const search    = document.getElementById('historySearch').value.toLowerCase();
     const filterEl  = document.getElementById('historyFilter');
@@ -448,6 +620,10 @@
 
   if (!myName) openNameModal();
   else document.getElementById('currentNameDisplay').textContent = myName;
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
 </script>
 </body>
 </html>
